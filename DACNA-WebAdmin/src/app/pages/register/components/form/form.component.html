@@ -1,0 +1,158 @@
+<form [formGroup]="registerForm" class="form surface-highest">
+    <h2 class="title on-primary-container">Register</h2>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input 
+            matInput 
+            type="text" 
+            placeholder="telisacaramore"
+            formControlName="username"
+        >
+
+        @if(username?.hasError('required')) {
+            <mat-error>Username is <strong>required</strong></mat-error>
+        } @else if(username?.hasError('minLength')) {
+            <mat-error>Username must be at least <strong>6 characters long</strong></mat-error>
+        } @else if(username?.hasError('maxLength')) {
+            <mat-error>Username must be at most <strong>20 characters long</strong></mat-error>
+        }
+       
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input 
+            matInput 
+            type="email" 
+            placeholder="telisacaramore@gmail.com"
+            formControlName="email"
+        >
+
+        @if(email?.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+        } @else if(email?.hasError('email')) {
+            <mat-error>Email is <strong>invalid</strong></mat-error>
+        }
+       
+    </mat-form-field>
+
+    <mat-form-field  appearance="outline">
+        <mat-label>Password</mat-label>
+        <input 
+            matInput 
+            [type]="showPassword ? 'text' : 'password'" 
+            formControlName="password"
+        >
+        <button 
+            tabindex="-1"
+            mat-icon-button 
+            matSuffix
+            (click)="showPassword = !showPassword"
+            [attr.aria-label]="'Show password'"
+            [attr.aria-pressed]="!showPassword"
+            class="password-toggle"
+        >
+            <mat-icon>{{showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
+
+        @if(password?.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+        } @else if(password?.hasError('minlength')) {
+            <mat-error>Password must be at least <strong>8 characters long</strong></mat-error>
+        } @else if(password?.hasError('maxlength')) {
+            <mat-error>Password must be at most <strong>20 characters long</strong></mat-error>
+        }
+        
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Comfirm Password</mat-label>
+        <input 
+            matInput 
+            [type]="showConfirmPassword ? 'text' : 'password'" 
+            formControlName="confirmPassword"
+            [errorStateMatcher]="passwordErrorMatcher"
+        >
+        <button 
+            tabindex="-1"
+            mat-icon-button 
+            matSuffix
+            (click)="showConfirmPassword = !showConfirmPassword"
+            [attr.aria-label]="'Show password'"
+            [attr.aria-pressed]="!showConfirmPassword"
+            class="password-toggle"
+        >
+            <mat-icon>{{showConfirmPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
+        @if(registerForm.hasError('notmatched')) {
+            <mat-error>Passwords <strong>must match</strong></mat-error>
+        }
+    </mat-form-field>
+
+    <div class="combined-field">
+        <mat-form-field appearance="outline" class="first-name">
+            <mat-label>First Name</mat-label>
+            <input 
+                matInput 
+                type="text" 
+                placeholder="Telisa"
+                formControlName="firstName"
+                [errorStateMatcher]="comfirmPasswordErrorMatcher"
+            >
+    
+            @if(firstName?.hasError('required')) {
+                <mat-error>First Name is <strong>required</strong></mat-error>
+            } @else if(firstName?.hasError('minlength')) {
+                <mat-error>First Name must be at least <strong>2 characters long</strong></mat-error>
+            } @else if(firstName?.hasError('maxlength')) {
+                <mat-error>First Name must be at most <strong>20 characters long</strong></mat-error>
+            }
+           
+        </mat-form-field>
+       
+        <mat-form-field  appearance="outline" class="last-name">
+            <mat-label>Last Name</mat-label>
+            <input 
+                matInput 
+                type="text" 
+                placeholder="Caramore"
+                formControlName="lastName"
+            >
+    
+            @if(lastName?.hasError('required')) {
+                <mat-error>Last Name is <strong>required</strong></mat-error>
+            } @else if(lastName?.hasError('minlength')) {
+                <mat-error>Last Name must be at least <strong>2 characters long</strong></mat-error>
+            } @else if(lastName?.hasError('maxlength')) {
+                <mat-error>Last Name must be at most <strong>20 characters long</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input 
+            matInput 
+            type="text" 
+            placeholder="0123456789"
+            formControlName="phoneNumber"
+        >
+
+        @if(phoneNumber?.hasError('required')) {
+            <mat-error>Username is <strong>required</strong></mat-error>
+        } @else if(phoneNumber?.hasError('pattern')) {
+            <mat-error>Phone number is <strong>invalid</strong></mat-error>
+        } 
+       
+    </mat-form-field>
+
+    <button mat-flat-button (click)="submit()">Register</button>
+
+    <div class="bottom-container">
+        <span class="login on-surface-variant">
+            Have an account? <span routerLink="/login" class="on-primary-container">Login</span>
+        </span>
+    </div>
+</form>
+

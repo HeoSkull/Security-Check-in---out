@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.first-name {
+  min-width: 100px;
+  max-width: 200px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.last-name {
+  min-width: 200px;
+  max-width: 500px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status {
+  min-width: 100px;
+  max-width: 200px;
+}

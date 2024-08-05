@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Add Members</h2>
+<mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <input matInput placeholder="Search user by username or email" (input)="handleInput($event)">
+    </mat-form-field>
+
+    <div class="selected-users">
+        @if(selectedUsers.length > 0) {
+            <mat-card appearance="outlined">
+                @for (selectedUser of selectedUsers; track $index) {
+                    <mat-card-content>
+                        <mat-chip-row
+                            (removed)="handleRemoveUser(selectedUser)"
+                            [editable]="false"
+                        >
+                            {{selectedUser.username}}
+                            <button matChipRemove [attr.aria-label]="'remove ' + selectedUser.username">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    </mat-card-content>
+                }
+            </mat-card>
+        }
+    </div>
+
+    <div class="users">
+        @if (users()) {
+            @for (user of users(); track $index) {
+                <mat-card class="card" appearance="outlined" >
+                    <mat-card-header>
+                        <mat-card-title class="title">{{ user.username }}</mat-card-title>
+                        <mat-card-subtitle class="email">{{ user.email }}</mat-card-subtitle>
+                        <div mat-card-sm-image class="wrapper">
+                            <img [src]="user.photoUrl" class="avatar">
+                        </div>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <button mat-button color="primary" (click)="handleSelectUser(user)" class="add-button">
+                            <mat-icon>add</mat-icon>
+                            Add
+                        </button>
+                    </mat-card-content>
+                </mat-card>
+            } @empty {
+                @if(search$.value >= 3) {
+                    <div class="empty">No user found</div>
+                }
+            }
+        } 
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="handleCancel()">Cancel</button>
+    <button mat-flat-button (click)="handleAddMembers()">Add Selected</button>
+</mat-dialog-actions>

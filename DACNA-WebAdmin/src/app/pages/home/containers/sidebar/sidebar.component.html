@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="logo">
+        <div class="logo-wrapper">
+            <img src="./assets/logo.png" alt="Gwen Cute UWU">
+        </div>
+
+        <div class="title">
+            <h1 class="on-primary-container">
+                Chấm Công Online
+            </h1>
+        </div>
+    </div>
+
+    <div class="nav-selector">
+        @for (sidebarButton of sidebarButtons; track $index) {
+            @if(currentRoute === sidebarButton.route) {
+                <button mat-flat-button>{{ sidebarButton.label }}</button>
+            } @else {
+                <button mat-button (click)="navigateTo(sidebarButton.route)">{{ sidebarButton.label }}</button>
+            }
+        }
+    </div>
+</div>

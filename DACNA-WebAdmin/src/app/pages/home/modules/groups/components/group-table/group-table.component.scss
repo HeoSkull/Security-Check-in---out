@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.name {
+  max-width: 200px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.description {
+  max-width: 500px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  width: 250px;
+}
+
+.actions-buttons {
+  display: flex;
+  flex-direction: row;
+}

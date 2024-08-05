@@ -1,0 +1,53 @@
+
+<h2 mat-dialog-title>History of <strong>{{ data.member.firstName }} {{ data.member.lastName }}</strong></h2>
+<mat-dialog-content>
+    <mat-form-field appearance="outline" class="choose-days"> 
+        <mat-label>Choose amount of days: </mat-label>
+        <mat-select (valueChange)="handleValueChanged($event)" value="3">
+          @for (option of options; track option) {
+            <mat-option [value]="option.value">{{option.viewValue}}</mat-option>
+          }
+        </mat-select>
+    </mat-form-field>
+ 
+    <div class="result" *ngrxLet="workdayHistoryState$ as workdayHistoryState ">
+      @if(workdayHistoryState) {
+        @for (whs of workdayHistoryState.workdayHistories; track whs.date) {
+          <mat-card appearance="outlined" class="date-card">
+            <mat-card-header>
+              <mat-card-title>{{ whs.date }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Total: {{ whs.total.hour }} hours {{ whs.total.minute }} minutes</p>
+            </mat-card-content>
+
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title> Workdays </mat-panel-title>
+                </mat-expansion-panel-header>
+                @for(workday of whs.workdays; track $index) {
+                  <mat-card appearance="outlined" class="workday-card">
+                    <mat-card-header>
+                      <mat-card-title>
+                          {{ $index + 1 }}
+                      </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p>Checked in: {{ workday.check_in | date: 'dd/MM/yy HH:mm:ss'}}</p>
+                      <p>Checked out: {{ workday.check_out | date: 'dd/MM/yy HH:mm:ss'}}</p>
+                    </mat-card-content>
+                  </mat-card>
+                }
+              </mat-expansion-panel>
+            </mat-accordion>
+            
+          </mat-card>
+
+        }
+      }
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="handleOnClose()">Close</button>
+</mat-dialog-actions>

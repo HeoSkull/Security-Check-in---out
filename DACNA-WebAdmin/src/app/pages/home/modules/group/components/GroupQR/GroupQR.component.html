@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>{{data.groupName}} QR Code</h2>
+<mat-dialog-content>
+    <mat-card class="card surface-high">
+        <div class="content-container">
+            <div class="qr-wrapper">
+                <canvas #QRcanvas></canvas>
+            </div>
+        </div>
+    </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-stroked-button [matMenuTriggerFor]="qrSizeMenu">
+        <mat-icon>file_download</mat-icon>
+        <span>Download</span>
+        <mat-menu #qrSizeMenu="matMenu">
+            @for (size of qrSizes; track $index) {
+                <button mat-menu-item (click)="downloadQR(size)">{{size}}x{{size}}</button>
+            }
+        </mat-menu>
+    </button>
+    <button mat-flat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

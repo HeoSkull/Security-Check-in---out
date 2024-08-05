@@ -1,0 +1,116 @@
+/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@use "./m3-theme.scss";
+@use "sass:map";
+
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+@font-face {
+  font-family: "Google Sans";
+  src: url("https://fonts.gstatic.com/s/googlesans/v29/4UaGrENHsxJlGDuGo1OIlL3Owp4.woff2")
+    format("woff2");
+}
+
+@include mat.core();
+
+* {
+  box-sizing: border-box;
+}
+
+@mixin theme($theme) {
+  @if (mat.get-theme-type($theme) == dark) {
+    .primary-container {
+      background-color: rgba(
+        mat.get-theme-color($theme, primary-container),
+        0.2
+      );
+    }
+  } @else {
+    .primary-container {
+      background-color: rgba(
+        mat.get-theme-color($theme, primary-container),
+        0.25
+      );
+    }
+  }
+
+  .primary {
+    background-color: mat.get-theme-color($theme, primary);
+  }
+
+  .primary-text {
+    color: mat.get-theme-color($theme, primary);
+  }
+
+  .on-primary {
+    color: mat.get-theme-color($theme, on-primary);
+  }
+
+  .on-primary-container {
+    color: mat.get-theme-color($theme, on-primary-container);
+  }
+
+  .surface-highest {
+    background-color: mat.get-theme-color($theme, surface-container-highest);
+  }
+
+  .surface-high {
+    background-color: mat.get-theme-color($theme, surface-container-high);
+  }
+
+  .surface {
+    background-color: mat.get-theme-color($theme, surface-container);
+  }
+
+  .surface-low {
+    background-color: mat.get-theme-color($theme, surface-container-low);
+  }
+
+  .surface-lowest {
+    background-color: mat.get-theme-color($theme, surface-container-lowest);
+  }
+
+  .on-surface {
+    color: mat.get-theme-color($theme, on-surface);
+  }
+
+  .on-surface-variant {
+    color: mat.get-theme-color($theme, on-surface-variant);
+  }
+
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: mat.get-theme-color($theme, on-primary-container);
+  }
+  .mat-mdc-tab.mdc-tab--active:focus .mdc-tab__text-label {
+    color: mat.get-theme-color($theme, on-primary-container);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: mat.get-theme-color($theme, primary);
+    border-radius: 10px;
+  }
+}
+
+:root {
+  @include theme(m3-theme.$dark-theme);
+  @include mat.all-component-themes(m3-theme.$dark-theme);
+  --md-ref-typeface-plain: "Google Sans", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--md-ref-typeface-plain);
+  font-size: 16px;
+  font-weight: 400;
+
+  line-height: 1.5;
+}

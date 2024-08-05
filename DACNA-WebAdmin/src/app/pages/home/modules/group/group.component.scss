@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-left: 1rem;
+  padding: 1rem;
+
+  .group-name-wrapper {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .qr-button {
+    margin-left: 1rem;
+  }
+}
+
+.tab-container {
+  ::ng-deep mat-tab-header {
+    max-width: 750px;
+  }
+
+  .tab {
+    width: 200px;
+  }
+
+  .tab-icon {
+    margin-right: 8px;
+  }
+
+  .tab-content {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,37 @@
+<ng-container>
+    <div class="header">
+        <h1 class="group-name-wrapper">Group <span class="group-name on-primary-container">{{groupState()?.name}}</span></h1>
+        <button mat-stroked-button class="qr-button on-primary-container" (click)="onCreateQRCode()">
+            <mat-icon>qr_code</mat-icon>
+            QR Code
+        </button>
+
+        @if(currentMemberState()?.role === 'owner') {
+            <button mat-flat-button class="qr-button on-primary-container" (click)="onFindMember()">
+                <mat-icon>person_add</mat-icon>
+                Add Member
+            </button>
+        }
+
+    </div>
+    
+    <div class="tab-container">
+        <mat-tab-group animationDuration="0ms">
+            @for (tab of tabs; track $index) {
+                <mat-tab class="tab">
+                    <ng-template mat-tab-label>
+                        <mat-icon class="tab-icon">
+                            {{tab.icon}}
+                        </mat-icon>
+                        {{tab.label}}
+                    </ng-template>
+                    <div class="tab-content">
+                        <ng-container *ngComponentOutlet="tab.component"></ng-container>
+                    </div>
+                </mat-tab>
+            }
+        </mat-tab-group>
+    </div>
+</ng-container>
+
+

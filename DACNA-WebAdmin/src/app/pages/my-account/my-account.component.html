@@ -1,0 +1,124 @@
+
+<div class="container surface-lowest">
+    <div class="back-button-container">
+        <button mat-stroked-button (click)="handleGoBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Back
+        </button>
+    </div>
+    <div class="content surface">
+        <div class="header">
+            <h1 class="title on-surface">
+               
+                My account
+            </h1>
+            <span>
+                <button mat-flat-button (click)="handleTurnOnEditing()">
+                    <mat-icon>edit</mat-icon>
+                    Edit
+                </button>
+            </span>
+        </div>
+        
+
+        <div class="main" *ngrxLet="user$ as user">
+            <div class="avatar-container">
+                <div class="wrapper">
+                    <img [src]="user?.photoUrl!">
+                </div>
+            </div>
+            <div class="information-container">
+                <form class="form" [formGroup]="userForm">
+                    <h3 class="category on-surface">Account information</h3>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput formControlName="username" />
+
+                        @if (username?.hasError('required')) {
+                            <mat-error>Username is required</mat-error>
+                        } @else if (username?.hasError('minlength')) {
+                            <mat-error>Username must be at least 3 characters long</mat-error>
+                        } 
+                    </mat-form-field>
+
+                    <div class="full-name">
+                        <mat-form-field class="first-name" appearance="outline">
+                            <mat-label>First name</mat-label>
+                            <input matInput formControlName="firstName" />
+
+                            @if (firstName?.hasError('required')) {
+                                <mat-error>First name is required</mat-error>
+                            } @else if (firstName?.hasError('minlength')) {
+                                <mat-error>First name must be at least 3 characters long</mat-error>
+                            } @else if (firstName?.hasError('maxlength')) {
+                                <mat-error>First name must be at most 20 characters long</mat-error>
+                            }
+
+                        </mat-form-field>
+    
+                        <mat-form-field class="last-name" appearance="outline">
+                            <mat-label>Last name</mat-label>
+                            <input matInput formControlName="lastName" />
+
+                            @if (lastName?.hasError('required')) {
+                                <mat-error>Last name is required</mat-error>
+                            } @else if (lastName?.hasError('minlength')) {
+                                <mat-error>Last name must be at least 3 characters long</mat-error>
+                            } @else if (lastName?.hasError('maxlength')) {
+                                <mat-error>Last name must be at most 20 characters long</mat-error>
+                            }
+
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" />
+
+                        @if (email?.hasError('required')) {
+                            <mat-error>Email is required</mat-error>
+                        } @else if (email?.hasError('email')) {
+                            <mat-error>Invalid email</mat-error>
+                        }
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone" />
+
+                        @if (phone?.hasError('required')) {
+                            <mat-error>Phone is required</mat-error>
+                        } @else if (phone?.hasError('pattern')) {
+                            <mat-error>Invalid phone number</mat-error>
+                        }
+
+                    </mat-form-field>
+
+                    @if(isEditing) {
+                        <div class="actions">
+                            <button mat-button (click)="handleCancelEditing()">
+                                Cancel
+                            </button>
+                            <button mat-flat-button (click)="handleSaveChanges()" [disabled]="userForm.invalid || userForm.pristine || !isChanged" >
+                                @if (isLoading$ | async) {
+                                    <mat-spinner diameter="20"></mat-spinner>
+                                } @else {
+                                    Save
+                                }
+                            </button>
+                        </div>
+                    }
+                </form>
+
+                <div class="associated">
+                    <h3 class="category on-surface">Associated accounts</h3>
+                    <div>Google</div>
+                    <div>Github</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

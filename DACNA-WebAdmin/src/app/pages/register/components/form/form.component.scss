@@ -1,0 +1,67 @@
+:host {
+  display: block;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 500;
+
+  margin-bottom: 2rem;
+}
+
+.form {
+  min-width: 450px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+  border-radius: 10px;
+
+  .combined-field {
+    width: 100%;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .first-name {
+      margin-right: 10px;
+    }
+
+    .last-name {
+      margin-left: 10px;
+    }
+  }
+
+  mat-form-field {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+.password-toggle {
+  margin-top: 0 !important;
+}
+
+.bottom-container {
+  margin-top: 20px;
+
+  .login {
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    cursor: pointer;
+  }
+}

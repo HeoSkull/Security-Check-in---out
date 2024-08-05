@@ -1,0 +1,31 @@
+<div class="container">
+    <span>
+        <button mat-icon-button (click)="handleToggle()">
+            <mat-icon class="on-primary-container">
+                {{ open ? 'chevron_left' : 'chevron_right'}}
+            </mat-icon>
+        </button>
+    </span>
+
+    <span class="user surface-low">
+        <span class="name">
+            <span>
+                Hello
+            </span>
+            <span class="name-wrapper on-primary-container" [matMenuTriggerFor]="userMenu">{{ user?.username }}</span>
+        </span>
+        <span>
+            <home-avatar (logout)="handleLogout()" [src]="user?.photoUrl" [matMenuTriggerFor]="userMenu"></home-avatar>
+            <mat-menu class="user-menu" #userMenu="matMenu">
+                <button mat-menu-item (click)="handleMyAccount()">
+                    <mat-icon>account_circle</mat-icon>
+                    <span>My account</span>
+                </button>
+                <button  mat-menu-item (click)="handleLogout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+            </mat-menu>
+        </span>
+    </span>
+</div>

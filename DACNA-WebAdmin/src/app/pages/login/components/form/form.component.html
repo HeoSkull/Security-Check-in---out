@@ -1,0 +1,73 @@
+<form [formGroup]="loginForm" class="form surface-highest" (keydown)="handleKeyDownSubmit($event)">
+    <h2 class="title on-primary-container">Login</h2>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+            matInput
+            type="text"
+            placeholder="telisacaramore"
+            formControlName="username"
+        >
+
+        @if(username?.hasError('required')) {
+            <mat-error>Username is <strong>required</strong></mat-error>
+        } 
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input 
+            matInput 
+            [type]="showPassword ? 'text' : 'password'" 
+            formControlName="password"
+        >
+        <button 
+            mat-icon-button 
+            matSuffix
+            (click)="handleShowPassword($event)"
+            [attr.aria-label]="'Show password'"
+            [attr.aria-pressed]="!showPassword"
+            class="password-toggle"
+        >
+            <mat-icon>{{showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
+
+        @if(password?.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+        } @else if(password?.hasError('minlength')) {
+            <mat-error>Password must be at least <strong>6 characters long</strong></mat-error>
+        } @else if(password?.hasError('maxlength')) {
+            <mat-error>Password must be at most <strong>20 characters long</strong></mat-error>
+        }
+    </mat-form-field>    
+    <button mat-flat-button (click)="submit()">Login</button>
+    <div class="bottom-container">
+        <span class="register on-surface-variant">
+            Don't have an account? <span routerLink="/register" class="on-primary-container">Register</span>
+        </span>
+        <div class="platforms">
+            <span class="google">
+                <button mat-icon-button>
+                    <mat-icon>
+                        <img src="./assets/icons/google.svg">
+                    </mat-icon>
+                </button>
+            </span>
+            <span class="google">
+                <button mat-icon-button>
+                    <mat-icon>
+                        <img src="./assets/icons/facebook.svg">
+                    </mat-icon>
+                </button>
+            </span>
+            <span class="google">
+                <button mat-icon-button>
+                    <mat-icon>
+                        <img src="./assets/icons/github.svg">
+                    </mat-icon>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>

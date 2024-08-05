@@ -1,0 +1,15 @@
+<ng-container *ngrxLet="membersState$ as membersState">
+    <div class="information-container">
+        <div class="table">
+            <members-table 
+                [members]="membersState.groupMembersPagination?.members!" 
+                (memberSelected)="handleMemberSelected($event)"
+                (memberHistorySelected)="handleViewMemberHistory($event)"
+                (memberStatisticalSelected)="handleViewMemberStatistical($event)"
+                (memberDeleted)="handleMemberDeleted($event)"
+                [currentMember]="currentMember()"
+            ></members-table>
+        </div>
+    </div>
+</ng-container>
+

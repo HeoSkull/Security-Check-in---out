@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.choose-days {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.result {
+  max-height: 400px;
+  overflow: auto;
+
+  .date-card {
+    margin-bottom: 10px;
+  }
+
+  .workday-card {
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,10 @@
+<ng-container *ngrxLet="membersState$ as membersState">
+    <div class="information-container">
+        <div class="table">
+            <status-table
+                [members]="membersState.groupMembersPagination?.members!" 
+                [currentMember]="currentMember()"
+            ></status-table>
+        </div>
+    </div>
+</ng-container>

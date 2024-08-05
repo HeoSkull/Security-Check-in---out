@@ -1,0 +1,43 @@
+<table mat-table [dataSource]="groups!">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef class="on-primary-container"> Name </th>
+    <td mat-cell *matCellDef="let element" class="name"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef class="on-primary-container"> Description </th>
+    <td mat-cell *matCellDef="let element" class="description"> 
+        {{element.description}} 
+    </td>
+  </ng-container>
+
+  <!-- Action Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef class="on-primary-container"> <span style="padding: 15px;">Actions</span> </th>
+    <td mat-cell *matCellDef="let element" class="actions">
+      <div class="actions-buttons">
+        <button mat-button (click)="goToGroup(element.id)">Detail</button>  
+        @if(user?.id === element.owner.user_id || user?.role === 'owner') {
+          <button mat-button (click)="editGroup(element)">Edit</button>    
+          <button mat-button (click)="deleteGroup(element.id)">Delete</button>    
+        }
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div>
+  <mat-paginator 
+    [pageSizeOptions]="[]" 
+    [pageSize]=5
+    [length]="totalGroups" 
+    [pageIndex]="pageIndex"
+    showFirstLastButtons
+    (page)="hadnleOnChangePaginate($event)"
+    ></mat-paginator>
+</div>
